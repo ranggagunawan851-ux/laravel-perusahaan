@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="100%" height="100%">
+  <defs>
+    <!-- Gradient Background Badge -->
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    
+    <!-- Accent Gradient -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon Symbol: Interlocking Isometric 'N' & Grid -->
+  <g transform="translate(10, 10)">
+    <!-- Base Node/Cube Structure -->
+    <path d="M 50 10 L 85 30 L 85 70 L 50 90 L 15 70 L 15 30 Z" fill="url(#primaryGradient)" stroke="#334155" stroke-width="2"/>
+    
+    <!-- Connected Inner Craft Lines (Nexus Junction) -->
+    <path d="M 50 10 L 50 50 L 85 70" fill="none" stroke="url(#accentGradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 15 30 L 50 50 L 50 90" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 15 70 L 50 50 L 85 30" fill="none" stroke="#60A5FA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Center Precision Node Point -->
+    <circle cx="50" cy="50" r="5" fill="#F8FAFC"/>
+  </g>
+
+  <!-- Typography -->
+  <g font-family="System-UI, -apple-system, 'Segoe UI', Roboto, sans-serif">
+    <!-- Brand Name: NEXUS -->
+    <text x="120" y="62" font-size="38" font-weight="800" letter-spacing="4" fill="#0F172A">NEXUS</text>
+    
+    <!-- Brand Subtitle/Tag: CRAFT -->
+    <text x="122" y="88" font-size="18" font-weight="600" letter-spacing="9" fill="#2563EB">CRAFT</text>
+    
+    <!-- Separator Line -->
+    <line x1="120" y1="96" x2="340" y2="96" stroke="#E2E8F0" stroke-width="2"/>
+  </g>
+</svg>
