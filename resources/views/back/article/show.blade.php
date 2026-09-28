@@ -46,12 +46,8 @@
             </tr>
             <tr>
                 <th>Publish Date</th>
-                    <td>{{ \Carbon\Carbon::parse($article->publish_date)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('d-m-Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($article->publish_date)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('d M Y') }}</td>
             </tr>
-            {{-- <tr>
-                <th>Writer</th>
-                <td>: {{ $article->user?->name ?? 'Admin' }}</td>
-            </tr> --}}
         </table>
 
         <div class="float-end mt-2">

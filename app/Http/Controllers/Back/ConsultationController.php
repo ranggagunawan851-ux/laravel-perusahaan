@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateConsultationRequest;
 use App\Models\Consultation;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ConsultationController extends Controller
@@ -18,43 +19,40 @@ class ConsultationController extends Controller
      */
     public function storePublic(Request $request)
     {
-        // 1. Validasi Input Data
+        // 1. Cari Service terlebih dahulu (bisa lewat Slug atau ID)
+        $service = Service::where('slug', $request->service_id)
+                    ->orWhere('id', $request->service_id)
+                    ->first();
+
+        // 2. Validasi Input Data
         $request->validate([
-            'name'              => 'required|string|max:255',
-            'email'             => 'required|email|max:255',
-            'phone'             => 'required|string|max:20',
-            'service_id'        => 'required|exists:services,id',
-            'message'           => 'required|string',
+            'name'       => 'required|string|max:255',
+            'email'      => 'required|email|max:255',
+            'phone'      => 'required|string|max:20',
+            'service_id' => 'required',
+            'message'    => 'required|string',
         ]);
 
-        // 2. SIMPAN DATA KE DATABASE (Status default otomatis 'pending')
+        // Pastikan Service ditemukan di database
+        if (!$service) {
+            return redirect()->back()->withErrors(['service_id' => 'Layanan yang dipilih tidak valid.'])->withInput();
+        }
+
+        // 3. SIMPAN DATA KE DATABASE (Kode unik terisi otomatis dari Model Event)
         $consultation = Consultation::create([
-            'name'              => $request->name,
-            'email'             => $request->email,
-            'phone'             => $request->phone,
-            'service_id'        => $request->service_id,
-            'message'           => $request->message,
-            'status'            => 'pending',
+            'name'       => $request->name,
+            'email'      => $request->email,
+            'phone'      => $request->phone,
+            'service_id' => $service->id,
+            'message'    => $request->message,
+            'status'     => 'pending',
         ]);
 
-        // 3. Ambil Nama service
-        $service = Service::find($request->service_id);
-        $namaService = $service ? $service->nama_service : '-';
+        // 4. Load relasi service agar nama service bisa dipanggil di Blade modal WA
+        $consultation->load('service');
 
-        // 4. Susun Format Pesan WhatsApp
-        $nomorWaAdmin = '6282269174012';
-
-        $text  = "Halo, saya telah mengirim formulir konsultasi:\n\n";
-        $text .= "*Nama:* " . $request->name . "\n";
-        $text .= "*Email:* " . $request->email . "\n";
-        $text .= "*No HP/WA:* " . $request->phone . "\n";
-        $text .= "*Service:* " . $namaService . "\n";
-        $text .= "*Pesan/Kebutuhan:* " . $request->message;
-
-        // 5. Generate Link WA & Redirect User
-        $waUrl = "https://wa.me/" . $nomorWaAdmin . "?text=" . urlencode($text);
-
-        return redirect()->away($waUrl);
+        // 5. REDIRECT BACK DENGAN SESSION (Modal pop-up akan otomatis terbuka)
+        return redirect()->back()->with('consultation_success', $consultation);
     }
 
     /**
@@ -122,29 +120,41 @@ class ConsultationController extends Controller
         return redirect()->route('consultation.index')->with('success', 'Consultation updated successfully!');
     }
 
-    /**
-     * Method baru untuk update status manual oleh Admin (misal: ke 'completed')
-     */
     public function updateStatus(Request $request, Consultation $consultation)
-{
-    $request->validate([
-        'status' => 'required|in:pending,processed,completed,cancelled',
-    ]);
+    {
+        // Cegah perubahan data jika status sudah completed atau cancelled
+        if (in_array($consultation->status, ['completed', 'cancelled'])) {
+            return redirect()->back()->withErrors([
+                'status' => 'This consultation status is locked and can no longer be changed.'
+            ]);
+        }
 
-    $data = [
-        'status' => $request->status,
-    ];
+        $request->validate([
+            'status' => 'required|in:pending,processed,completed,cancelled',
+            'note'   => 'nullable|string',
+            'image'  => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
 
-    // Jika status diubah ke completed dan belum memiliki image, berikan URL Picsum Photos
-    if ($request->status == 'completed' && !$consultation->image) {
-        // rand() memastikan gambar acak yang tersimpan
-        $data['image'] = 'https://picsum.photos/1200/800?random=' . rand(1, 999);
+        $data = [
+            'status' => $request->status,
+            'note'   => $request->note,
+        ];
+
+        // Simpan foto HANYA jika admin mengunggah file baru
+        if ($request->hasFile('image')) {
+            // Hapus foto lama jika ada
+            if ($consultation->image && Storage::disk('public')->exists($consultation->image)) {
+                Storage::disk('public')->delete($consultation->image);
+            }
+
+            // Simpan foto baru dari admin
+            $data['image'] = $request->file('image')->store('consultations', 'public');
+        }
+
+        $consultation->update($data);
+
+        return redirect()->back()->with('success', 'Status, note, and proof photo have been saved successfully!');
     }
-
-    $consultation->update($data);
-
-    return redirect()->back()->with('success', 'Status konsultasi berhasil diperbarui!');
-}
 
     public function destroy(Consultation $consultation)
     {

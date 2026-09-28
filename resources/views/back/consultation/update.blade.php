@@ -29,14 +29,14 @@
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" id="name"
-                            class="form-control @error('name') is-invalid @enderror" placeholder="Masukkan nama lengkap" value="{{ old('name', $consultation->name) }}">
+                            class="form-control @error('name') is-invalid @enderror" placeholder="Enter full name" value="{{ old('name', $consultation->name) }}">
                     </div>
 
                     {{-- Email --}}
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email"
-                            class="form-control @error('email') is-invalid @enderror" placeholder="contoh@email.com" value="{{ old('email', $consultation->email) }}">
+                            class="form-control @error('email') is-invalid @enderror" placeholder="Example@email.com" value="{{ old('email', $consultation->email) }}">
                     </div>
 
                     {{-- Phone --}}
@@ -79,7 +79,7 @@
                         <label for="message" class="form-label">Message</label>
                         <textarea name="message" id="message" rows="4"
                             class="form-control @error('message') is-invalid @enderror"
-                            placeholder="Masukkan detail pesan atau pertanyaan konsultasi">{{ old('message', $consultation->message) }}</textarea>
+                            placeholder="Enter message details or consultation questions">{{ old('message', $consultation->message) }}</textarea>
                     </div>
 
                     {{-- Tombol Aksi --}}

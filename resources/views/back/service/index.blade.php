@@ -35,7 +35,7 @@
            <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama Service</th>
+                    <th>Name Service</th>
                     <th>Category</th>
                     <th>Price</th>
                     <th>Publish Date</th>
@@ -53,7 +53,7 @@
                         <td class="text-nowrap">
                             Rp. {{ number_format((float) $item->price, 0, ',', '.') }}
                         </td>
-                        <td>{{ \Carbon\Carbon::parse($item->publish_date)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('d-m-Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->publish_date)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('d M Y') }}</td>
 
                         <td class="text-center">
                             <div class="d-flex justify-content-center align-items-center gap-1">

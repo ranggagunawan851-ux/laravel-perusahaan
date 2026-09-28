@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
-    protected $guarded = ['id'];
+    protected $fillable = ['name', 'slug'];
 
         // relasi hasmany category -> article
     public function articles(): HasMany

@@ -32,7 +32,7 @@
                         <label for="title" class="form-label">Title</label>
                         <input type="text" name="title" id="title"
                             class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $article->title) }}"
-                            placeholder="Masukkan judul artikel...">
+                            placeholder="Enter article title...">
                     </div>
 
                     {{-- Konten Artikel --}}
@@ -40,7 +40,7 @@
                         <label for="desc" class="form-label">Descripsition</label>
                         <textarea name="desc" id="myeditor" rows="10"
                             class="form-control @error('desc') is-invalid @enderror"
-                            placeholder="Tulis isi artikel di sini...">{{ old('desc', $article->desc) }}</textarea>
+                            placeholder="Write article content here...">{{ old('desc', $article->desc) }}</textarea>
                     </div>
 
                 <div class="">

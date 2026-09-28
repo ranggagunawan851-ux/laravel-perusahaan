@@ -10,13 +10,13 @@ return new class extends Migration
     {
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
             $table->foreignId('service_id')->nullable()->constrained('services')->onDelete('cascade');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
             $table->text('message');
             $table->enum('status', ['pending', 'processed', 'completed', 'cancelled'])->default('pending');
-            $table->date('consultation_date')->nullable();
             $table->timestamps();
         });
     }

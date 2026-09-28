@@ -4,18 +4,18 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.bootstrap5.min.css">
 @endpush
 
-@section('title', 'Article Perusahaan - Nexus Craft')
+@section('title', 'Category Perusahaan - Nexus Craft')
 
 @section('content')
 {{-- content --}}
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2"><i class="fa-regular fa-file-lines"></i> Articles</h1>
+        <h1 class="h2"><i class="fa-regular fa-file-lines"></i> Category</h1>
     </div>
 
     <div class="mt-3">
-        <a href="{{ url('article/create')}}" class="btn btn-success mb-2"><i class="fa-solid fa-plus"></i> Create</a>
+        <button class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#modalCreate"><i class="fa-solid fa-plus"></i> Create</button>
 
         @if ($errors->any())
         <div class="my-3">
@@ -36,66 +36,24 @@
                 <tr>
                     <th>No</th>
                     <th>Title</th>
-                    <th>Category</th>
-                    <th>Views</th>
-                    <th>Status</th>
-                    {{-- <th>Publish Date</th> --}}
+                    <th>Slug</th>
+                    <th>Created At</th>
                     <th>Function</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach ($articles as $item)
+                @foreach ($categories as $item)
                 <tr>
                     <td>{{ $loop->iteration}}</td>
-                    <td>{{ $item->title}}</td>
-                    <td>{{ $item->category->name}}</td>
-                    <td>{{ $item->views}}x</td>
+                    <td>{{ $item->name}}</td>
+                    <td>{{ $item->slug}}</td>
+                    <td>{{ $item->created_at->format('d M Y') }}</td>
 
-                    @if ($item->status == 0)
-                    <td>
-                        <span class="badge bg-danger">Draft</span>
-                    </td>
-                    @else
-                    <td>
-                        <span class="badge bg-success">Publish</span>
-                    </td>
-                    @endif
-
-                    {{-- <td>{{ \Carbon\Carbon::parse($item->publish_date)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('d-m-Y') }}
-                    </td> --}}
-
-                    {{-- <td class="text-center">
-                        <div class="d-flex justify-content-center align-items-center gap-1">
-                            <a href="{{ route('article.show', $item->id) }}" class="btn btn-sm btn-secondary">Detail</a>
-                            <a href="{{ route('article.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
-
-                            <a href="javascript:void(0)" onclick="deleteArticle(this)" data-id="{{ $item->id }}"
-                                class="btn btn-sm btn-danger">Delete</a>
-                            <form id="delete-form-{{ $item->id }}" action="{{ route('article.destroy', $item->id) }}"
-                                method="POST" style="display: none;">
-                                @csrf
-                                @method('DELETE')
-                            </form>
-                        </div>
-                    </td> --}}
                     <td class="text-center">
                         <div class="d-flex justify-content-center align-items-center gap-1">
-                            <a href="{{ route('article.show', $item->id) }}" class="btn btn-secondary">Detail</a>
-                            <a href="{{ route('article.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-
-                            <a href="javascript:void(0)"
-                            onclick="deleteArticle(this)"
-                            data-id="{{ $item->id }}"
-                            class="btn btn-danger">Delete</a>
-
-                            <form id="delete-form-{{ $item->id }}"
-                                action="{{ route('article.destroy', $item->id) }}"
-                                method="POST"
-                                style="display: none;">
-                                @csrf
-                                @method('DELETE')
-                            </form>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate{{ $item->id }}">Edit</button>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $item->id }}">Delete</button>
                         </div>
                     </td>
                 </tr>
@@ -103,6 +61,16 @@
             </tbody>
         </table>
     </div>
+
+    {{-- modal create --}}
+    @include('back.category.create-modal')
+
+    {{-- modal update --}}
+    @include('back.category.update-modal')
+
+    {{-- modal delete --}}
+    @include('back.category.delete-modal')
+
 </main>
 @endsection
 
@@ -124,11 +92,11 @@
         })
     }
 
-    function deleteArticle(e) {
+    function deleteCategories(e) {
         let id = e.getAttribute('data-id');
 
         Swal.fire({
-            title: 'Delete Article',
+            title: 'Delete Categories',
             text: "Are You Sure.?",
             icon: 'question',
             showCancelButton: true,
@@ -143,7 +111,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: 'DELETE',
-                    url: '/article/' + id,
+                    url: '/categories/' + id,
                     dataType: "json",
                     success: function (response) {
                         Swal.fire({
@@ -151,7 +119,7 @@
                             text: response.message,
                             icon: 'success',
                         }).then(() => {
-                            window.location.href = '/article';
+                            window.location.href = '/categories';
                         });
                     },
                     error: function (xhr, ajaxOptions, thrownError) {

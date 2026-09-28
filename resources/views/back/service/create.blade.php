@@ -26,10 +26,10 @@
             <div class="row">
                     {{-- Nama Service --}}
                     <div class="mb-3">
-                        <label for="nama_service" class="form-label">Nama Service</label>
+                        <label for="nama_service" class="form-label">Name Service</label>
                         <input type="text" name="nama_service" id="nama_service"
                             class="form-control @error('nama_service') is-invalid @enderror" value="{{ old('nama_service') }}"
-                            placeholder="Masukkan Nama Service...">
+                            placeholder="Enter Service Name...">
                     </div>
 
                     {{-- Konten Artikel --}}
@@ -37,7 +37,7 @@
                         <label for="desc" class="form-label">Descripsition</label>
                         <textarea name="desc" id="myeditor" rows="10"
                             class="form-control @error('desc') is-invalid @enderror"
-                            placeholder="Tulis isi artikel di sini...">{{ old('desc') }}</textarea>
+                            placeholder="Write article content here...">{{ old('desc') }}</textarea>
                     </div>
 
                 <div class="">
@@ -75,15 +75,6 @@
                                     min="0" max="999999999">
                             </div>
                         </div>
-
-                            {{-- <div class="mb-3">
-                                <label for="status">Status</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="" hidden>-- choose --</option>
-                                    <option value="1">Publish</option>
-                                    <option value="0">Draft</option>
-                                </select>
-                            </div> --}}
 
                         <div class="col-6">
                             <div class="mb-3">

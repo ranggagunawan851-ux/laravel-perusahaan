@@ -4,15 +4,6 @@
 
 @section('content')
 <div class="container py-5">
-    <!-- Breadcrumb Navigasi -->
-    <nav aria-label="breadcrumb" class="mb-4" data-aos="fade-down">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-decoration-none">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ url('/#service') }}" class="text-decoration-none">Our Services</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ $service->nama_service }}</li>
-        </ol>
-    </nav>
-
     <div class="row g-5">
         <!-- Kolom Gambar & Deskripsi Utama -->
         <div class="col-lg-8" data-aos="fade-right">

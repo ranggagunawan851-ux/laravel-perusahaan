@@ -24,21 +24,20 @@
             @csrf
 
             <div class="row">
-                    {{-- Judul Artikel --}}
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" name="title" id="title"
-                            class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}"
-                            placeholder="Masukkan judul artikel...">
-                    </div>
+                {{-- Judul Artikel --}}
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror"
+                        value="{{ old('title') }}" placeholder="Enter article title...">
+                </div>
 
-                    {{-- Konten Artikel --}}
-                    <div class="mb-3">
-                        <label for="desc" class="form-label">Descripsition</label>
-                        <textarea name="desc" id="myeditor" rows="10"
-                            class="form-control @error('desc') is-invalid @enderror"
-                            placeholder="Tulis isi artikel di sini...">{{ old('desc') }}</textarea>
-                    </div>
+                {{-- Konten Artikel --}}
+                <div class="mb-3">
+                    <label for="desc" class="form-label">Descripsition</label>
+                    <textarea name="desc" id="myeditor" rows="10"
+                        class="form-control @error('desc') is-invalid @enderror"
+                        placeholder="Write article content here...">{{ old('desc') }}</textarea>
+                </div>
 
                 <div class="">
                     {{-- Kategori --}}
@@ -54,28 +53,19 @@
                     </div>
 
                     <div class="row">
-                    {{-- Upload Gambar --}}
-                        {{-- <div class="col-6">
-                            <div class="mb-3">
-                                <label for="img">Image (Max 2MB)</label>
-                                <input type="file" name="img" id="img" class="form-control">
 
-                                <div class="mt-2 text-center">
-                                    <img src="" alt="" class="img-thumbnail img-preview d-none" width="100px">
-                                </div>
-                            </div>
-                        </div> --}}
 
                         <div class="col-6">
-    <div class="mb-3">
-        <label for="img">Images / Gallery (Max 2MB per file)</label>
-        <!-- Tambahkan attribute multiple dan array [] pada name -->
-        <input type="file" name="img[]" id="img" class="form-control" multiple accept="image/*" onchange="previewImg()">
+                            <div class="mb-3">
+                                <label for="img">Images / Gallery (Max 2MB per file)</label>
+                                <!-- Tambahkan attribute multiple dan array [] pada name -->
+                                <input type="file" name="img[]" id="img" class="form-control" multiple accept="image/*"
+                                    onchange="previewImg()">
 
-        <!-- Container Preview Banyak Gambar -->
-        <div class="mt-2 d-flex flex-wrap gap-2" id="preview-container"></div>
-    </div>
-</div>
+                                <!-- Container Preview Banyak Gambar -->
+                                <div class="mt-2 d-flex flex-wrap gap-2" id="preview-container"></div>
+                            </div>
+                        </div>
 
                         <div class="col-6">
                             <div class="mb-3">
@@ -132,7 +122,8 @@
 </script>
 
 <script>
-    CKEDITOR.replace( 'myeditor', options);
+    CKEDITOR.replace('myeditor', options);
+
 </script>
 <script>
     // Fitur untuk pratinjau gambar sebelum di-upload
@@ -174,5 +165,6 @@
             });
         }
     }
+
 </script>
 @endpush

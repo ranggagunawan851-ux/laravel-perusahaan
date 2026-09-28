@@ -29,7 +29,7 @@
             <div class="row">
                     {{-- Nama Service --}}
                     <div class="mb-3">
-                        <label for="nama_service" class="form-label">Nama Service</label>
+                        <label for="nama_service" class="form-label">Name Service</label>
                         <input type="text" name="nama_service" id="nama_service"
                             class="form-control @error('nama_service') is-invalid @enderror" value="{{ old('nama_service', $service->nama_service) }}"
                             placeholder="Masukkan Nama Service...">
@@ -63,7 +63,7 @@
                         <label for="img">Image (Max 2MB)</label>
                         <input type="file" name="img" id="img" class="form-control">
                         <div class="mt-1">
-                            <small>Gambar Lama</small><br>
+                            <small>Existing Images</small><br>
                             <img src="{{ asset('storage/service/'.$service->img )}}" alt="" width="95px">
                         </div>
                     </div>
@@ -80,15 +80,6 @@
                                     min="0" max="999999999">
                             </div>
                         </div>
-
-                            {{-- <div class="mb-3">
-                                <label for="status">Status</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="" hidden>-- choose --</option>
-                                    <option value="1">Publish</option>
-                                    <option value="0">Draft</option>
-                                </select>
-                            </div> --}}
 
                         <div class="col-6">
                             <div class="mb-3">

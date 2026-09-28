@@ -15,6 +15,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2" href="{{ url('categories') }}">
+                                    <i class="fa-solid fa-table-list"></i>
+                                    Category
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2" href="{{ url('article') }}">
                                     <i class="fa-regular fa-file-lines"></i>
                                     Article

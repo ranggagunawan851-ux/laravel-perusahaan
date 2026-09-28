@@ -11,7 +11,7 @@
     <div class="mt-3">
         <table class="table table-striped table-bordered">
             <tr>
-                <th width="250px">Nama Service</th>
+                <th width="250px">Name Service</th>
                 <td>: {{ $service->nama_service }}</td>
             </tr>
             <tr>
@@ -36,12 +36,8 @@
             </tr>
             <tr>
                 <th>Publish Date</th>
-                    <td>{{ \Carbon\Carbon::parse($service->publish_date)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('d-m-Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($service->publish_date)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('d M Y') }}</td>
             </tr>
-            {{-- <tr>
-                <th>Writer</th>
-                <td>: {{ $service->user?->name ?? 'Admin' }}</td>
-            </tr> --}}
         </table>
 
         <div class="float-end mt-2">

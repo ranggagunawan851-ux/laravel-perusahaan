@@ -19,7 +19,7 @@ class DashboardController extends Controller
             'total_portofolios' => Portofolio::count(),
             'total_consultations' => Consultation::count(),
             'latest_article' => Article::with('Category')->whereStatus(1)->latest()->take(5)->get(),
-            'populer_article' => Article::with('Category')->whereStatus(1)->orderBy('views', 'desc')->take(5)->get()
+            'latest_consultation' => Consultation::with('Service')->latest()->take(5)->get()
         ]);
     }
 }

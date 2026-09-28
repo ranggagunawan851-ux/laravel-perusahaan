@@ -27,8 +27,7 @@
         </button>
     </div>
 
-            <!-- Modal Filter Bulan -->
-    <!-- Modal Filter Tanggal (Start Date - End Date) -->
+        <!-- Modal Filter Tanggal (Start Date - End Date) -->
 <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -47,7 +46,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="end_date" class="form-label">End Date</label>
-                            <input type="date" name="end_date" id="end_date" class="form-control" value="{{ date('Y-m-d') }}" required>
+                            <input type="date" name="end_date" id="end_date" class="form-control" value="{{ date('Y-m-d') }}" min="{{ date('Y-m-01') }}" required>
                         </div>
                     </div>
                 </div>
@@ -85,6 +84,7 @@
                     <th>Phone</th>
                     <th>Service</th>
                     <th>Status</th>
+                    <th>Created At</th>
                     <th>Function</th>
                 </tr>
             </thead>
@@ -114,6 +114,7 @@
                             <span class="badge bg-secondary">{{ $item->status }}</span>
                         @endif
                     </td>
+                    <td>{{ \Carbon\Carbon::parse($item->created_at)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('d M Y') }}</td>
 
                     <td class="text-center">
                         <a href="{{ route('consultation.show', $item->id) }}" class="btn btn-secondary">Detail</a>
@@ -203,42 +204,20 @@
     });
 </script>
 
-{{-- <script>
-//     $(document).ready(function () {
-//         $('#dataTable').DataTable({
-//             processing: true,
-//             serverSide: true,
-//             ajax: '{{ url()->current() }}',
-//             columns: [{
-//                     data: 'DT_RowIndex',
-//                     name: 'DT_RowIndex',
-//                 },
-//                 {
-//                     data: 'title',
-//                     name: 'title',
-//                 },
-//                 {
-//                     data: 'category_id',
-//                     name: 'category_id',
-//                 },
-//                 {
-//                     data: 'views',
-//                     name: 'views',
-//                 },
-//                 {
-//                     data: 'status',
-//                     name: 'status',
-//                 },
-//                 {
-//                     data: 'publish_date',
-//                     name: 'publish_date',
-//                 },
-//                 {
-//                     data: 'button',
-//                     name: 'button',
-//                 }
-//             ]
-//         });
-//     });
-</script> --}}
+<script>
+    $(document).ready(function () {
+        // Validasi End Date berdasarkan Start Date
+        $('#start_date').on('change', function () {
+            let startDate = $(this).val();
+
+            // Ubah batas minimal tanggal End Date
+            $('#end_date').attr('min', startDate);
+
+            // Reset End Date jika nilainya lebih kecil dari Start Date
+            if ($('#end_date').val() < startDate) {
+                $('#end_date').val(startDate);
+            }
+        });
+    });
+</script>
 @endpush

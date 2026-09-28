@@ -18,9 +18,9 @@
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <span class="text-uppercase fs-7 fw-semibold text-white-50 tracking-wide">Total Article</span>
+                            <span class="text-uppercase fs-7 fw-semibold text-white-50 tracking-wide">Total Articles</span>
                             <h2 class="fw-bold mb-1 mt-2 text-white">{{ $total_articles }}</h2>
-                            <span class="text-white-50 fs-7">Published posts</span>
+                            <span class="text-white-50 fs-7">Published Posts</span>
                         </div>
                         <div class="bg-white bg-opacity-25 rounded-circle p-3 d-flex align-items-center justify-content-center backdrop-blur" style="width: 55px; height: 55px;">
                             <i class="fa-solid fa-newspaper fs-4 text-white"></i>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-footer bg-black bg-opacity-10 border-0 px-4 py-2 rounded-bottom-4">
                     <a href="{{ url('article') }}" class="text-white text-decoration-none fw-semibold fs-7 d-flex align-items-center justify-content-between">
-                        <span>View details</span> <i class="fa-solid fa-arrow-right fs-8"></i>
+                        <span>View Details</span> <i class="fa-solid fa-arrow-right fs-8"></i>
                     </a>
                 </div>
             </div>
@@ -41,9 +41,9 @@
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <span class="text-uppercase fs-7 fw-semibold text-white-50 tracking-wide">Total Service</span>
+                            <span class="text-uppercase fs-7 fw-semibold text-white-50 tracking-wide">Total Services</span>
                             <h2 class="fw-bold mb-1 mt-2 text-white">{{ $total_services }}</h2>
-                            <span class="text-white-50 fs-7">Active services</span>
+                            <span class="text-white-50 fs-7">Active Services</span>
                         </div>
                         <div class="bg-white bg-opacity-25 rounded-circle p-3 d-flex align-items-center justify-content-center backdrop-blur" style="width: 55px; height: 55px;">
                             <i class="fa-solid fa-briefcase fs-4 text-white"></i>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="card-footer bg-black bg-opacity-10 border-0 px-4 py-2 rounded-bottom-4">
                     <a href="{{ url('service') }}" class="text-white text-decoration-none fw-semibold fs-7 d-flex align-items-center justify-content-between">
-                        <span>View details</span> <i class="fa-solid fa-arrow-right fs-8"></i>
+                        <span>View Details</span> <i class="fa-solid fa-arrow-right fs-8"></i>
                     </a>
                 </div>
             </div>
@@ -64,9 +64,9 @@
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <span class="text-uppercase fs-7 fw-semibold text-white-50 tracking-wide">Total Portofolio</span>
+                            <span class="text-uppercase fs-7 fw-semibold text-white-50 tracking-wide">Total Portofolios</span>
                             <h2 class="fw-bold mb-1 mt-2 text-white">{{ $total_portofolios }}</h2>
-                            <span class="text-white-50 fs-7">Completed projects</span>
+                            <span class="text-white-50 fs-7">Completed Projects</span>
                         </div>
                         <div class="bg-white bg-opacity-25 rounded-circle p-3 d-flex align-items-center justify-content-center backdrop-blur" style="width: 55px; height: 55px;">
                             <i class="fa-solid fa-layer-group fs-4 text-white"></i>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="card-footer bg-black bg-opacity-10 border-0 px-4 py-2 rounded-bottom-4">
                     <a href="{{ url('portofolio') }}" class="text-white text-decoration-none fw-semibold fs-7 d-flex align-items-center justify-content-between">
-                        <span>View details</span> <i class="fa-solid fa-arrow-right fs-8"></i>
+                        <span>View Details</span> <i class="fa-solid fa-arrow-right fs-8"></i>
                     </a>
                 </div>
             </div>
@@ -87,9 +87,9 @@
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <span class="text-uppercase fs-7 fw-semibold text-white-50 tracking-wide">Consultation</span>
+                            <span class="text-uppercase fs-7 fw-semibold text-white-50 tracking-wide">Total Consultations</span>
                             <h2 class="fw-bold mb-1 mt-2 text-white">{{ $total_consultations }}</h2>
-                            <span class="text-white-50 fs-7">Client requests</span>
+                            <span class="text-white-50 fs-7">Client Requests</span>
                         </div>
                         <div class="bg-white bg-opacity-25 rounded-circle p-3 d-flex align-items-center justify-content-center backdrop-blur" style="width: 55px; height: 55px;">
                             <i class="fa-solid fa-comments fs-4 text-white"></i>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="card-footer bg-black bg-opacity-10 border-0 px-4 py-2 rounded-bottom-4">
                     <a href="{{ url('consultation') }}" class="text-white text-decoration-none fw-semibold fs-7 d-flex align-items-center justify-content-between">
-                        <span>View details</span> <i class="fa-solid fa-arrow-right fs-8"></i>
+                        <span>View Details</span> <i class="fa-solid fa-arrow-right fs-8"></i>
                     </a>
                 </div>
             </div>
@@ -107,7 +107,7 @@
 
     <div class="row">
         <div class="col-6">
-            <h4>Latest Article</h4>
+            <h4>Latest Articles</h4>
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -136,27 +136,27 @@
         </div>
 
         <div class="col-6">
-            <h4>Populer Article</h4>
+            <h4>Latest Consultations</h4>
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Title</th>
-                        <th>Category</th>
+                        <th>Service</th>
                         <th>Create At</th>
                         <th>Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach ($populer_article as $item)
+                    @foreach ($latest_consultation as $item)
                         <tr>
                             <td>{{ $loop->iteration}}</td>
-                            <td>{{ $item->title}}</td>
-                            <td>{{ $item->Category->name }}</td>
+                            <td>{{ $item->name}}</td>
+                            <td>{{ $item->service->nama_service }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td class="text-center">
-                                <a href="{{ url('article/'. $item->id)}}" class="btn btn-sm btn-secondary">Detail</a>
+                                <a href="{{ url('service/'. $item->id)}}" class="btn btn-sm btn-secondary">Detail</a>
                             </td>
                         </tr>
                     @endforeach
