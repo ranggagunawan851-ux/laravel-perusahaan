@@ -11,7 +11,7 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2"><i class="fa-solid fa-hand-holding-heart"></i> Service</h1>
+        <h1 class="h2"><i class="fa-solid fa-hand-holding-heart"></i> Services</h1>
     </div>
 
     <div class="mt-3">
@@ -38,7 +38,7 @@
                     <th>Name Service</th>
                     <th>Category</th>
                     <th>Price</th>
-                    <th>Publish Date</th>
+                    {{-- <th>Publish Date</th> --}}
                     <th>Function</th>
                 </tr>
             </thead>
@@ -53,7 +53,7 @@
                         <td class="text-nowrap">
                             Rp. {{ number_format((float) $item->price, 0, ',', '.') }}
                         </td>
-                        <td>{{ \Carbon\Carbon::parse($item->publish_date)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('d M Y') }}</td>
+                        {{-- <td>{{ \Carbon\Carbon::parse($item->publish_date)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('d M Y') }}</td> --}}
 
                         <td class="text-center">
                             <div class="d-flex justify-content-center align-items-center gap-1">

@@ -9,7 +9,7 @@ use App\Http\Controllers\Back\PortofolioController;
 use App\Http\Controllers\Front\ArticleController as FrontArticleController;
 use App\Http\Controllers\Front\PortofolioController as FrontPortofolioController;
 use App\Http\Controllers\Front\ServiceController as FrontServiceController;
-// use App\Http\Controllers\Front\CategoryController as FrontCategoryController;
+use App\Http\Controllers\Front\CategoryController as FrontCategoryController;
 use App\Http\Controllers\Front\ConsultationController as FrontConsultationController;
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\HomeController;
@@ -27,6 +27,8 @@ Route::get('/contact', [ContactController::class, 'index']);
 Route::get('/p/{slug}', [FrontArticleController::class, 'show']);
 Route::get('/articles', [FrontArticleController::class, 'index']);
 Route::post('/articles/search', [FrontArticleController::class, 'index'])->name('search');
+
+Route::get('/category/{slug}', [FrontCategoryController::class, 'index'])->name('category.show');
 
 // // Ganti /service/{id} menjadi /services/{id} (Tambahkan huruf 's')
 // Route::get('/services/{slug}', [FrontServiceController::class, 'show'])->name('front.service.show');

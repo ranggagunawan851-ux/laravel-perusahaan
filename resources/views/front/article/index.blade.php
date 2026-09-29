@@ -1,6 +1,6 @@
 @extends('front.layout.template')
 
-@section('title', 'Articles & Insights - Nexus Craft')
+@section('title', 'Articles - Nexus Craft')
 
 @push('css')
 <style>

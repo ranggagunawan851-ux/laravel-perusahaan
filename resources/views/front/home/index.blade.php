@@ -2,20 +2,17 @@
 
 @section('title', 'Home - Nexus Craft')
 
-{{-- Menambahkan CDN CSS AOS jika belum ada di template utama --}}
+{{-- CDN CSS AOS --}}
 @push('css')
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-{{-- STYLE TAMBAHAN WARNA MODERN TANPA MERUBAH STRUKTUR/TATA LETAK --}}
 <style>
-    /* Mencegah Halaman Bisa Digeser ke Samping (Fix Horizontal Scrollbar) */
-    html,
-    body {
+    /* Prevent Horizontal Scrollbar */
+    html, body {
         max-width: 100% !important;
         overflow-x: hidden !important;
     }
 
-    /* Wrapper utama untuk memastikan animasi AOS tidak membuat halaman bocor ke kanan */
     .page-wrapper {
         width: 100%;
         overflow-x: hidden;
@@ -34,7 +31,7 @@
         -webkit-text-fill-color: transparent;
     }
 
-    /* Vibrant Buttons */
+    /* Buttons */
     .btn-gradient-primary {
         background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
         color: #fff !important;
@@ -61,13 +58,12 @@
         box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6);
     }
 
-    /* Feature Icon Gradient */
     .feature-icon-colored {
         background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%) !important;
         box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4);
     }
 
-    /* Colorful Hover Effects for Cards */
+    /* Card Hover Effects */
     .card-colorful {
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         border: 1px solid rgba(229, 231, 235, 0.8) !important;
@@ -79,7 +75,6 @@
         box-shadow: 0 15px 30px rgba(37, 99, 235, 0.15) !important;
     }
 
-    /* Portfolio Image Hover Scale */
     .post-img-container {
         overflow: hidden;
     }
@@ -92,7 +87,7 @@
         transform: scale(1.08);
     }
 
-    /* Consultation Card Colorful Background */
+    /* Consultation Box */
     .consultation-box {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
         color: #ffffff !important;
@@ -119,13 +114,12 @@
         background-color: #1e293b !important;
         color: #ffffff !important;
     }
-
 </style>
 @endpush
 
 @section('content')
 
-<!-- Section Hero / Header Perusahaan (Background Foto + Sentuhan Warna) -->
+<!-- Section Hero -->
 <section class="text-white text-center mb-5 hero-section overflow-hidden d-flex align-items-center position-relative"
     style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 27, 75, 0.8) 100%),
                  url('{{ asset('front/img/nexus.png') }}') no-repeat center center / cover;
@@ -133,20 +127,17 @@
            height: 92dvh;
            padding: 80px 0;">
     <div class="container py-4" data-aos="zoom-in" data-aos-duration="1000">
-        <!-- Judul Lebih Besar & Berwarna -->
         <h1 class="display-2 fw-extrabold mb-4 tracking-tight text-gradient-cyan" data-aos="fade-down"
             data-aos-delay="200" style="letter-spacing: -1px; text-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);">
             Nexus Craft
         </h1>
 
-        <!-- Deskripsi dengan Ukuran Pas & Jarak Elegan -->
         <p class="fs-4 fw-normal mb-5 mx-auto opacity-90"
             style="max-width: 850px; line-height: 1.6; text-shadow: 0 1px 5px rgba(0,0,0,0.3);" data-aos="fade-up"
             data-aos-delay="400">
             Architecting your dream space. Bringing harmony to aesthetics, functionality, and high-quality construction.
         </p>
 
-        <!-- Tombol Aksi Berwarna -->
         <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap" data-aos="fade-up"
             data-aos-delay="600">
             <a href="#service" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold rounded-3 shadow-sm">
@@ -167,13 +158,13 @@
             <p class="text-muted">Professional solutions we provide for you</p>
         </div>
 
-        <div class="row g-0">
+        <div class="row g-4">
             @forelse ($services as $index => $item)
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}" data-aos-duration="800">
                 <div class="card h-100 shadow-sm border-0 text-center p-3 card-colorful">
                     <div class="card-body d-flex flex-column">
 
-                        {{-- 1. Gambar Service --}}
+                        {{-- Image Service --}}
                         <a href="{{ route('front.service.show', $item->slug) }}" class="text-decoration-none">
                             @if ($item->img)
                             <div class="mb-3 mx-auto shadow-sm"
@@ -189,7 +180,7 @@
                             @endif
                         </a>
 
-                        {{-- 2. Judul Service --}}
+                        {{-- Title Service --}}
                         <h5 class="card-title fw-bold">
                             <a href="{{ route('front.service.show', $item->slug) }}"
                                 class="text-dark text-decoration-none">
@@ -197,7 +188,6 @@
                             </a>
                         </h5>
 
-                        {{-- Format Harga --}}
                         <p class="text-gradient-gold fw-bold mb-2 fs-5">
                             Rp {{ number_format((float) $item->price, 0, ',', '.') }}
                         </p>
@@ -206,7 +196,6 @@
                             {{ Str::limit(strip_tags($item->desc), 100, '...') }}
                         </p>
 
-                        {{-- 3. Dua Tombol: Detail & Konsultasi --}}
                         <div class="d-flex gap-2 mt-3">
                             <a href="{{ route('front.service.show', $item->slug) }}"
                                 class="btn btn-outline-primary btn-sm flex-fill rounded-2">
@@ -223,7 +212,6 @@
                 </div>
             </div>
             @empty
-
             <div class="col-12 text-center text-muted" data-aos="fade-up">
                 <p>No services available yet.</p>
             </div>
@@ -248,8 +236,7 @@
                     </a>
                     <div class="card-body d-flex flex-column">
                         <div class="small text-muted mb-1">
-                            <i
-                                class="bi bi-calendar3 me-1 text-primary"></i>{{ \Carbon\Carbon::parse($item->publish_date)->format('d M Y') }}
+                            <i class="bi bi-calendar3 me-1 text-primary"></i>{{ \Carbon\Carbon::parse($item->publish_date)->format('d M Y') }}
                             @if($item->Category)
                             | <a href="{{ url('category/'.$item->Category->slug) }}"
                                 class="text-decoration-none badge bg-primary bg-opacity-10 text-primary">{{ $item->Category->name }}</a>
@@ -262,8 +249,7 @@
                         <p class="card-text text-muted small flex-grow-1">
                             {{ Str::limit(strip_tags($item->desc), 100, '...') }}
                         </p>
-                        <a href="{{ url('port/'.$item->slug) }}" class="btn btn-sm btn-gradient-primary mt-2">View
-                            Detail →</a>
+                        <a href="{{ url('port/'.$item->slug) }}" class="btn btn-sm btn-gradient-primary mt-2">View Detail →</a>
                     </div>
                 </div>
             </div>
@@ -299,8 +285,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <div class="small text-muted mb-1">
-                                        <i
-                                            class="bi bi-calendar3 me-1 text-primary"></i>{{ \Carbon\Carbon::parse($item->publish_date)->format('d M Y') }}
+                                        <i class="bi bi-calendar3 me-1 text-primary"></i>{{ \Carbon\Carbon::parse($item->publish_date)->format('d M Y') }}
                                         |
                                         <a href="{{ url('category/'.$item->Category->slug) }}"
                                             class="text-decoration-none badge bg-info bg-opacity-10 text-info">{{ $item->Category->name }}</a>
@@ -327,6 +312,7 @@
         @include('front.layout.side-widget')
     </div>
 
+    <!-- Section Consultation -->
     <section id="consultation" class="my-5 p-4 rounded shadow-sm consultation-box" data-aos="zoom-in-up"
         data-aos-duration="1000">
         <div class="row align-items-center">
@@ -372,7 +358,7 @@
         </div>
     </section>
 
-    <!-- MODAL POP-UP WHATSAPP (Tema Modern Sewarna Website) -->
+    <!-- Modal Success WhatsApp -->
     @if (session('consultation_success'))
     @php
     $data = session('consultation_success');
@@ -392,7 +378,6 @@
         data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content consultation-box border-0 overflow-hidden text-white shadow-lg rounded-4">
-                <!-- Header Modal -->
                 <div class="modal-header border-bottom border-secondary border-opacity-25 px-4 pt-4 pb-3">
                     <h5 class="modal-title fw-bold text-gradient-cyan d-flex align-items-center"
                         id="waSuccessModalLabel">
@@ -402,13 +387,11 @@
                         aria-label="Close"></button>
                 </div>
 
-                <!-- Body Modal -->
                 <div class="modal-body text-center p-4">
                     <p class="mb-3 text-light opacity-90 fs-6">
                         Thank You, <strong class="text-white">{{ $data->name }}</strong>. Your request has been successfully saved in our system.
                     </p>
 
-                    <!-- Box Kode Unik -->
                     <div class="rounded-3 p-3 my-3"
                         style="background: rgba(255, 255, 255, 0.05); border: 1px dashed rgba(6, 182, 212, 0.5);">
                         <small class="text-uppercase fw-bold tracking-wider d-block mb-1 text-light opacity-75"
@@ -421,7 +404,6 @@
                     </p>
                 </div>
 
-                <!-- Footer Modal -->
                 <div class="modal-footer border-top border-secondary border-opacity-25 justify-content-center p-3">
                     <a href="{{ $waUrl }}" target="_blank"
                         class="btn btn-gradient-warning fw-bold px-4 py-2 w-100 rounded-3 shadow">
@@ -432,26 +414,22 @@
         </div>
     </div>
 
-    <!-- Script untuk Otomatis Membuka Modal saat Redirect -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var myModal = new bootstrap.Modal(document.getElementById('waSuccessModal'));
             myModal.show();
         });
-
     </script>
     @endif
 </div>
 
 <script>
     function selectService(slug) {
-        // 1. Set nilai pada select dropdown berdasarkan slug yang diklik
         const selectElement = document.getElementById('serviceSelect');
         if (selectElement) {
             selectElement.value = slug;
         }
 
-        // 2. Efek scroll halus mengarah ke section konsultasi
         const consultationSection = document.getElementById('consultation');
         if (consultationSection) {
             consultationSection.scrollIntoView({
@@ -459,10 +437,8 @@
             });
         }
     }
-
 </script>
 
-{{-- Inisialisasi JS AOS --}}
 @push('js')
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
@@ -473,7 +449,6 @@
             easing: 'ease-in-out',
         });
 
-        // 2. Baca Query Parameter dari URL (Akan berjalan saat datang dari halaman show)
         const urlParams = new URLSearchParams(window.location.search);
         const serviceSlug = urlParams.get('service_slug');
 
@@ -481,7 +456,6 @@
             selectService(serviceSlug);
         }
     });
-
 </script>
 @endpush
 @endsection

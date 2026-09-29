@@ -4,15 +4,20 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function index($slugCategory) {
-        return view('front.category.index', [
-            'articles' => Article::with('Category')->whereHas('Category', function($q) use ($slugCategory) {
-                $q->where('slug', $slugCategory);
-            })->latest()->paginate(6),
-            'category'=> $slugCategory,
-        ]);
+    public function index($slug)
+    {
+        // Cari kategori berdasarkan slug
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+        // Ambil artikel yang termasuk dalam kategori tersebut
+        $articles = Article::where('category_id', $category->id)
+                           ->latest()
+                           ->paginate(6);
+
+        return view('front.category.index', compact('category', 'articles'));
     }
 }
